@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZZ & MM 的小窝 🏠</title>
+    <style>
+        /* 这里是样式代码 (CSS)，让网页变漂亮 */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            color: #333;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #666;
+        }
+        .heart {
+            color: #ff6b6b;
+            font-size: 3em;
+            animation: beat 1s infinite alternate;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        @keyframes beat {
+            to { transform: scale(1.2); }
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #999;
+        }
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 标题 -->
+        <h1>欢迎来到 ZZ 和 MM 的记忆仓库</h1>
+        
+        <!-- 跳动的爱心 -->
+        <div class="heart">❤️</div>
+
+        <!-- 正文内容 -->
+        <p>
+            这里是我们专属的小天地。<br>
+            记录生活中的点点滴滴，收藏每一个值得纪念的瞬间。
+        </p>
+
+        <!-- 一个简单的互动按钮 -->
+        <button onclick="alert('谢谢你访问我们的小家！🎉')">
+            点击送给我们一朵小花 🌸
+        </button>
+
+        <div class="footer">
+            Created with love by ZZ & MM • 2026
+        </div>
+    </div>
+
+</body>
+</html>
