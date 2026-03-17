@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZZ & MM 的小窝 🏠</title>
     <style>
-        /* 这里是样式代码 (CSS)，让网页变漂亮 */
+        /* --- 基础样式 --- */
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
@@ -66,6 +66,44 @@
         button:hover {
             background-color: #ff5252;
         }
+
+        /* --- 照片墙专用样式 (已修复位置) --- */
+        .gallery {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .photo-card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            width: 200px;
+            transition: transform 0.3s;
+        }
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+        .photo-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #555;
+            font-weight: bold;
+        }
+        .gallery h2 {
+            width: 100%;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
     </style>
 </head>
 <body>
@@ -83,11 +121,37 @@
             记录生活中的点点滴滴，收藏每一个值得纪念的瞬间。
         </p>
 
-        <!-- 一个简单的互动按钮 -->
+        <!-- 互动按钮 -->
         <button onclick="alert('谢谢你访问我们的小家！🎉')">
             点击送给我们一朵小花 🌸
         </button>
 
+        <!-- 📷 照片墙区域 (只保留一份) -->
+        <div class="gallery">
+            <h2>📸 我们的珍贵瞬间</h2>
+            
+            <!-- 照片卡片 1 -->
+            <div class="photo-card">
+                <!-- ⚠️ 记得替换这里的 src 链接 -->
+                <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="我们的合照">
+                <div class="caption">第一次一起去旅行 ✈️</div>
+            </div>
+
+            <!-- 照片卡片 2 -->
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1529619768328-e37af76c6fe5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="开心的时刻">
+                <div class="caption">那个笑得超开心的下午 😄</div>
+            </div>
+
+            <!-- 照片卡片 3 -->
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="温馨日常">
+                <div class="caption">平凡又温馨的日常 🍲</div>
+            </div>
+        </div>
+        <!-- 📷 照片墙结束 -->
+
+        <!-- 底部署名 -->
         <div class="footer">
             Created with love by ZZ & MM • 2026
         </div>
