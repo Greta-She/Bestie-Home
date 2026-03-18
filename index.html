@@ -3,126 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZZ & MM 的小窝 🏠</title>
+<title>ZZ & MM 🎬</title>
 
 <style>
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    color: #333;
     margin: 0;
+    background: black;
+    color: white;
+    font-family: "Helvetica Neue";
     overflow-x: hidden;
 }
 
-/* 🌟 星空 */
-.stars {
+/* 🌌 暗角 */
+body::after {
+    content: "";
     position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    inset: 0;
+    background: radial-gradient(circle, transparent 40%, black 90%);
+    pointer-events: none;
 }
 
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #999;
-    animation: twinkle 2s infinite;
+/* 🎬 开场 */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes twinkle {
-    50% { opacity: 0.3; }
+/* ⌨️ 打字机 */
+.typewriter {
+    border-right: 2px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 4s steps(30) forwards, blink 1s infinite;
 }
 
-/* 🌠 流星 */
-.shooting-star {
-    position: absolute;
-    width: 2px;
-    height: 80px;
-    background: linear-gradient(#999, transparent);
-    transform: rotate(45deg);
-    animation: shoot 6s infinite;
+@keyframes typing {
+    to { width: 300px; }
+}
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
-@keyframes shoot {
-    0% { top: -100px; left: -100px; opacity: 1;}
-    100% { top: 100%; left: 100%; opacity: 0;}
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-h1, h2 {
-    color: #ff6b6b;
-}
-
-.heart {
-    font-size: 3em;
-    animation: beat 1s infinite alternate;
-}
-
-@keyframes beat {
-    to { transform: scale(1.2); }
-}
-
-button {
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
+/* 📸 图片 */
 .gallery {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
+    justify-content: center;
+    padding: 40px;
 }
 
-.photo-card {
-    width: 200px;
-    background: white;
-    padding: 10px;
+.gallery img {
+    width: 220px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.4s;
 }
 
-.photo-card img {
-    width: 100%;
-    border-radius: 8px;
+.gallery img:hover {
+    transform: scale(1.1);
 }
 
-.caption {
-    margin-top: 8px;
+/* 🖼️ 全屏查看 */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
 
-/* 💬 图片占位 */
-.quote-img {
-    width: 250px;
-    height: 180px;
-    background: #fff;
-    border-radius: 15px;
-    display: inline-block;
-    margin: 10px;
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
 }
 
-/* 🎂 重要时刻 */
+/* 🎞️ 滚动渐显 */
+.fade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 🎂 */
 .moments {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,1fr);
     gap: 20px;
+    padding: 40px;
 }
 
-.moment-card {
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
+.moment {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 /* 🍷 微醺 */
@@ -134,10 +117,10 @@ button {
 .wine img {
     position: absolute;
     width: 120px;
-    border-radius: 10px;
+    cursor: pointer;
 }
 
-/* 星星散落 */
+/* 散落 */
 .wine img:nth-child(1){ top:10%; left:20%;}
 .wine img:nth-child(2){ top:30%; left:60%;}
 .wine img:nth-child(3){ top:60%; left:30%;}
@@ -147,75 +130,38 @@ button {
 .wine img:nth-child(7){ top:80%; left:40%;}
 .wine img:nth-child(8){ top:40%; left:50%;}
 
-.end {
-    background: #ffe4ec;
-    padding: 30px;
-    border-radius: 15px;
-    margin-top: 40px;
-}
-
-.footer {
-    margin-top: 40px;
-    color: #999;
-}
 </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
-
-<div class="container">
-
-<h1>欢迎来到 ZZ 和 MM 的记忆仓库 💕</h1>
-<div class="heart">❤️</div>
-
-<p>记录生活中的点点滴滴。</p>
-
-<button onclick="alert('谢谢你访问我们的小家！🎉')">
-点击送花 🌸
-</button>
-
-<!-- 📸 不动 -->
-<h2>📸 我们的瞬间</h2>
-<div class="gallery">
-    <div class="photo-card">
-        <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2">
-        <div class="caption">第一次旅行 ✈️</div>
-    </div>
-    <div class="photo-card">
-        <img src="https://images.unsplash.com/photo-1529619768328-e37af76c6fe5">
-        <div class="caption">笑到停不下来 😄</div>
-    </div>
-    <div class="photo-card">
-        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300">
-        <div class="caption">日常的小幸福 🍲</div>
-    </div>
+<!-- 🎬 开场 -->
+<div class="hero">
+    <h1 class="typewriter">ZZ & MM 的故事 🎬</h1>
 </div>
 
-<!-- 🎥 不动 -->
-<h2>🎥 动态回忆</h2>
-<video controls width="300"></video>
-
-<!-- 💬 改为图片 -->
-<h2>💬 我们说过的话</h2>
-<div>
-    <div class="quote-img"></div>
-    <div class="quote-img"></div>
+<!-- 📸 -->
+<div class="gallery fade">
+    <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2">
+    <img src="https://images.unsplash.com/photo-1529619768328-e37af76c6fe5">
 </div>
 
-<!-- 🎂 重要时刻 -->
-<h2>🎂 重要时刻</h2>
-<div class="moments">
-    <div class="moment-card">十八岁的惊喜 🎉</div>
-    <div class="moment-card">大学毕业典礼 🎓</div>
-    <div class="moment-card">第一次一起旅行 ✈️</div>
-    <div class="moment-card">陪我搬家 🏠</div>
+<!-- 💬 -->
+<div class="fade" style="text-align:center;">
+    <h2>我们说过的话</h2>
+    <p class="typewriter">你一直在，我就不怕。</p>
 </div>
 
-<!-- 🍷 微醺 -->
-<h2>🍷 微醺时刻</h2>
-<div class="wine">
+<!-- 🎂 -->
+<div class="moments fade">
+    <div class="moment">十八岁的惊喜 🎉</div>
+    <div class="moment">大学毕业 🎓</div>
+    <div class="moment">第一次旅行 ✈️</div>
+    <div class="moment">陪我搬家 🏠</div>
+</div>
+
+<!-- 🍷 -->
+<div class="wine fade">
     <img src="https://via.placeholder.com/120">
     <img src="https://via.placeholder.com/120">
     <img src="https://via.placeholder.com/120">
@@ -226,37 +172,37 @@ button {
     <img src="https://via.placeholder.com/120">
 </div>
 
-<!-- 💌 结尾 -->
-<div class="end">
-<h2>💌 写给你的一封信</h2>
-<p>
-谢谢你出现在我的生活里。<br><br>
-未来也要一直在 💕
-</p>
-</div>
-
-<div class="footer">
-Created with love by ZZ & MM • 2026
-</div>
-
+<!-- 🖼️ 弹出层 -->
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img">
 </div>
 
 <script>
-const starsContainer = document.getElementById("stars");
+/* 🎞️ 滚动动画 */
+const fades=document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{
+    fades.forEach(el=>{
+        if(el.getBoundingClientRect().top<window.innerHeight-100){
+            el.classList.add("show");
+        }
+    });
+});
 
-for(let i=0;i<60;i++){
-    let star = document.createElement("div");
-    star.className = "star";
-    star.style.top = Math.random()*100 + "%";
-    star.style.left = Math.random()*100 + "%";
-    starsContainer.appendChild(star);
-}
+/* 📸 点击放大 */
+const images=document.querySelectorAll("img");
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightbox-img");
 
-for(let i=0;i<2;i++){
-    let meteor = document.createElement("div");
-    meteor.className = "shooting-star";
-    document.body.appendChild(meteor);
-}
+images.forEach(img=>{
+    img.onclick=()=>{
+        lightbox.style.display="flex";
+        lightboxImg.src=img.src;
+    }
+});
+
+lightbox.onclick=()=>{
+    lightbox.style.display="none";
+};
 </script>
 
 </body>
