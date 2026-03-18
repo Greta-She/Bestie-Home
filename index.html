@@ -27,7 +27,6 @@ body::after {
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -38,11 +37,11 @@ body::after {
     white-space: nowrap;
     overflow: hidden;
     width: 0;
-    animation: typing 4s steps(30) forwards, blink 1s infinite;
+    animation: typing 3s steps(25) forwards, blink 1s infinite;
 }
 
 @keyframes typing {
-    to { width: 300px; }
+    to { width: 260px; }
 }
 @keyframes blink {
     50% { border-color: transparent; }
@@ -71,10 +70,11 @@ body::after {
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.95);
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .lightbox img {
@@ -86,7 +86,7 @@ body::after {
 .fade {
     opacity: 0;
     transform: translateY(40px);
-    transition: 1s;
+    transition: 1s ease;
 }
 
 .fade.show {
@@ -118,9 +118,14 @@ body::after {
     position: absolute;
     width: 120px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* 散落 */
+.wine img:hover {
+    transform: scale(1.15);
+}
+
+/* 散落布局 */
 .wine img:nth-child(1){ top:10%; left:20%;}
 .wine img:nth-child(2){ top:30%; left:60%;}
 .wine img:nth-child(3){ top:60%; left:30%;}
@@ -149,7 +154,7 @@ body::after {
 <!-- 💬 -->
 <div class="fade" style="text-align:center;">
     <h2>我们说过的话</h2>
-    <p class="typewriter">你一直在，我就不怕。</p>
+    <p>你一直在，我就不怕。</p>
 </div>
 
 <!-- 🎂 -->
@@ -178,31 +183,41 @@ body::after {
 </div>
 
 <script>
-/* 🎞️ 滚动动画 */
-const fades=document.querySelectorAll(".fade");
-window.addEventListener("scroll",()=>{
-    fades.forEach(el=>{
-        if(el.getBoundingClientRect().top<window.innerHeight-100){
-            el.classList.add("show");
-        }
+try {
+    /* 🎞️ 滚动动画（更丝滑） */
+    const fades = document.querySelectorAll(".fade");
+
+    window.addEventListener("scroll", () => {
+        requestAnimationFrame(() => {
+            fades.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add("show");
+                }
+            });
+        });
     });
-});
 
-/* 📸 点击放大 */
-const images=document.querySelectorAll("img");
-const lightbox=document.getElementById("lightbox");
-const lightboxImg=document.getElementById("lightbox-img");
+    /* 📸 只绑定指定图片（修复卡死） */
+    const images = document.querySelectorAll(".gallery img, .wine img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
 
-images.forEach(img=>{
-    img.onclick=()=>{
-        lightbox.style.display="flex";
-        lightboxImg.src=img.src;
+    if (lightbox && lightboxImg) {
+        images.forEach(img => {
+            img.addEventListener("click", () => {
+                lightbox.style.display = "flex";
+                lightboxImg.src = img.src;
+            });
+        });
+
+        lightbox.addEventListener("click", () => {
+            lightbox.style.display = "none";
+        });
     }
-});
 
-lightbox.onclick=()=>{
-    lightbox.style.display="none";
-};
+} catch (e) {
+    console.error("页面JS错误:", e);
+}
 </script>
 
 </body>
