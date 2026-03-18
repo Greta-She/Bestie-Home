@@ -14,6 +14,23 @@ body {
     overflow-x: hidden;
 }
 
+/* 🌌 动态星空（不卡关键） */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(white 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveStars 60s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes moveStars {
+    from { transform: translate(0,0); }
+    to { transform: translate(-500px,-500px); }
+}
+
 /* 🌌 暗角 */
 body::after {
     content: "";
@@ -47,6 +64,15 @@ body::after {
     50% { border-color: transparent; }
 }
 
+/* 🎞️ 分幕标题 */
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    margin-top: 80px;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
 /* 📸 图片 */
 .gallery {
     display: flex;
@@ -57,9 +83,11 @@ body::after {
 
 .gallery img {
     width: 220px;
+    height: 150px;
+    object-fit: cover;
     border-radius: 10px;
     cursor: pointer;
-    transition: 0.4s;
+    transition: 0.5s;
 }
 
 .gallery img:hover {
@@ -82,11 +110,11 @@ body::after {
     max-height: 90%;
 }
 
-/* 🎞️ 滚动渐显 */
+/* 🎞️ 滚动动画 */
 .fade {
     opacity: 0;
-    transform: translateY(40px);
-    transition: 1s ease;
+    transform: translateY(60px);
+    transition: 1.2s ease;
 }
 
 .fade.show {
@@ -106,9 +134,10 @@ body::after {
     background: rgba(255,255,255,0.05);
     padding: 20px;
     border-radius: 10px;
+    backdrop-filter: blur(5px);
 }
 
-/* 🍷 微醺 */
+/* 🍷 微醺（星星散落） */
 .wine {
     position: relative;
     height: 400px;
@@ -116,24 +145,24 @@ body::after {
 
 .wine img {
     position: absolute;
-    width: 120px;
+    width: 100px;
+    transition: 0.4s;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 .wine img:hover {
-    transform: scale(1.15);
+    transform: scale(1.2) rotate(5deg);
 }
 
-/* 散落布局 */
-.wine img:nth-child(1){ top:10%; left:20%;}
-.wine img:nth-child(2){ top:30%; left:60%;}
-.wine img:nth-child(3){ top:60%; left:30%;}
-.wine img:nth-child(4){ top:20%; left:80%;}
-.wine img:nth-child(5){ top:70%; left:70%;}
-.wine img:nth-child(6){ top:50%; left:10%;}
-.wine img:nth-child(7){ top:80%; left:40%;}
-.wine img:nth-child(8){ top:40%; left:50%;}
+/* 随机感更强 */
+.wine img:nth-child(1){ top:10%; left:15%;}
+.wine img:nth-child(2){ top:25%; left:70%;}
+.wine img:nth-child(3){ top:60%; left:20%;}
+.wine img:nth-child(4){ top:15%; left:85%;}
+.wine img:nth-child(5){ top:70%; left:65%;}
+.wine img:nth-child(6){ top:50%; left:5%;}
+.wine img:nth-child(7){ top:85%; left:40%;}
+.wine img:nth-child(8){ top:35%; left:45%;}
 
 </style>
 </head>
@@ -146,18 +175,20 @@ body::after {
 </div>
 
 <!-- 📸 -->
+<div class="section-title fade">我们的瞬间</div>
 <div class="gallery fade">
-    <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2">
-    <img src="https://images.unsplash.com/photo-1529619768328-e37af76c6fe5">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1516961642265-531546e84af2?w=800">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1529619768328-e37af76c6fe5?w=800">
 </div>
 
 <!-- 💬 -->
+<div class="section-title fade">我们说过的话</div>
 <div class="fade" style="text-align:center;">
-    <h2>我们说过的话</h2>
     <p>你一直在，我就不怕。</p>
 </div>
 
 <!-- 🎂 -->
+<div class="section-title fade">重要时刻</div>
 <div class="moments fade">
     <div class="moment">十八岁的惊喜 🎉</div>
     <div class="moment">大学毕业 🎓</div>
@@ -166,58 +197,50 @@ body::after {
 </div>
 
 <!-- 🍷 -->
+<div class="section-title fade">微醺时刻</div>
 <div class="wine fade">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
-    <img src="https://via.placeholder.com/120">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
+    <img loading="lazy" src="https://via.placeholder.com/100">
 </div>
 
-<!-- 🖼️ 弹出层 -->
+<!-- 🖼️ -->
 <div class="lightbox" id="lightbox">
     <img id="lightbox-img">
 </div>
 
 <script>
-try {
-    /* 🎞️ 滚动动画（更丝滑） */
-    const fades = document.querySelectorAll(".fade");
+const fades = document.querySelectorAll(".fade");
 
-    window.addEventListener("scroll", () => {
-        requestAnimationFrame(() => {
-            fades.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                    el.classList.add("show");
-                }
-            });
+window.addEventListener("scroll", () => {
+    requestAnimationFrame(() => {
+        fades.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight - 80) {
+                el.classList.add("show");
+            }
         });
     });
+});
 
-    /* 📸 只绑定指定图片（修复卡死） */
-    const images = document.querySelectorAll(".gallery img, .wine img");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
+const images = document.querySelectorAll(".gallery img, .wine img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
 
-    if (lightbox && lightboxImg) {
-        images.forEach(img => {
-            img.addEventListener("click", () => {
-                lightbox.style.display = "flex";
-                lightboxImg.src = img.src;
-            });
-        });
+images.forEach(img => {
+    img.onclick = () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    };
+});
 
-        lightbox.addEventListener("click", () => {
-            lightbox.style.display = "none";
-        });
-    }
-
-} catch (e) {
-    console.error("页面JS错误:", e);
-}
+lightbox.onclick = () => {
+    lightbox.style.display = "none";
+};
 </script>
 
 </body>
